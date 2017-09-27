@@ -19,7 +19,7 @@ main {
   left: 50%;
   width: 100px;
   height: 100px;
-  z-index: 1000;
+  z-index: 900;
 }
 
 .preloader-wrapper {
