@@ -2,25 +2,27 @@ var app = angular.module('AppmaxxLightmanager2', []);
 
 app.controller("TestCtrl", function($scope, $http, $log, $interval) {
 
-    $scope.title = 'Lichter';
+    $scope.title = 'Licht';
 
     $scope.loading = true;
     $interval(function() {
         $scope.loading = false;
-    }, 5000);
+        $('.card-content').matchHeight();
+    }, 1000);
 
 
-    $scope.toggleLight = function(light) {
+    $scope.toggleLight = function(room, light) {
         if (light.checked) {
-            Materialize.toast(light.name + ' wurde eingeschaltet', 4000);
+            Materialize.toast(room.name + ' ' + light.name + ' wurde eingeschaltet', 4000);
         } else {
-            Materialize.toast(light.name + ' wurde ausgeschaltet', 4000);
+            Materialize.toast(room.name + ' ' + light.name + ' wurde ausgeschaltet', 4000);
         }
     }
 
     $scope.rooms = [{
         'id': 1,
         'name': 'Wohnzimmer',
+        'icon': 'weekend',
         'temperature': 21.6,
         'lights': [{
             'id': 1,
@@ -38,6 +40,7 @@ app.controller("TestCtrl", function($scope, $http, $log, $interval) {
     }, {
         'id': 2,
         'name': 'Flur',
+        'icon': 'map',
         'temperature': 22.4,
         'lights': [{
             'id': 3,
@@ -51,6 +54,7 @@ app.controller("TestCtrl", function($scope, $http, $log, $interval) {
     }, {
         'id': 3,
         'name': 'K\u00fcche',
+        'icon': 'kitchen',
         'temperature': 26.35,
         'lights': [{
             'id': 5,
@@ -61,6 +65,26 @@ app.controller("TestCtrl", function($scope, $http, $log, $interval) {
             'name': 'Regal',
             'checked': false
         }]
+    }, {
+        'id': 4,
+        'name': 'Badezimmer',
+        'icon': 'wc',
+        'temperature': 22.35,
+        'lights': [{
+            'id': 15,
+            'name': 'Spots',
+            'checked': false
+        }]
+    }, {
+        'id': 5,
+        'name': 'Kino',
+        'icon': 'videocam',
+        'temperature': 21.0,
+        'lights': [{
+            'id': 16,
+            'name': 'Spots',
+            'checked': false
+        }]
     }];
 
 });
@@ -69,4 +93,6 @@ $(document).ready(function() {
     $(".button-collapse").sideNav({
         draggable: true
     });
+
+    $('.card-content').matchHeight();
 })

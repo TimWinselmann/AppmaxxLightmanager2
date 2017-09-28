@@ -30,3 +30,8 @@ main {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+
+/* hide border on last table element */
+table tr:last-child {
+    border: none !important;
+}
