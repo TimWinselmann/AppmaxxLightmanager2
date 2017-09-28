@@ -4,11 +4,13 @@ app.controller("TestCtrl", function($scope, $http, $log, $interval) {
 
     $scope.title = 'Licht';
 
-    $scope.loading = true;
+    $scope.loading = false;
+    /*
     $interval(function() {
         $scope.loading = false;
-        $('.card-content').matchHeight();
+        //$('.card-content').matchHeight();
     }, 1000);
+    */
 
 
     $scope.toggleLight = function(room, light) {
@@ -67,7 +69,7 @@ app.controller("TestCtrl", function($scope, $http, $log, $interval) {
         }]
     }, {
         'id': 4,
-        'name': 'Badezimmer',
+        'name': 'Bad',
         'icon': 'wc',
         'temperature': 22.35,
         'lights': [{
@@ -94,5 +96,11 @@ $(document).ready(function() {
         draggable: true
     });
 
-    $('.card-content').matchHeight();
+    $('.grid').masonry({
+        // options
+        itemSelector: '.grid-item',
+        columnWidth: '.grid-sizer'
+    });
+
+    //$('.card-content').matchHeight();
 })

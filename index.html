@@ -2,17 +2,13 @@
 <html data-ng-app="AppmaxxLightmanager2">
   <head>
     <title>AppmaxxLightmanger2</title>
-    <!--Import Font Awesome Icons-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!--Import Google Icon Font-->
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
-
-    <link type="text/css" rel="stylesheet" href="css/style.css" />
-
-    <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="lib_css/font-awesome-4.7.0.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" href="lib_css/materialize-0.100.2.min.css"/>
+
+    <link rel="stylesheet" href="css/style.css" />
   </head>
 
   <body data-ng-controller="TestCtrl" data-ng-cloak>
@@ -61,8 +57,9 @@
     </div>
     <main class="container" >
 
-      <div class="row" data-ng-hide="loading">
-        <div class="col s12 m6 l4" data-ng-repeat="room in rooms | orderBy:'name'">
+      <div class="row grid" data-ng-hide="loading">
+        <div class="grid-sizer col s1"></div>
+        <div class="col s12 m6 l4 grid-item" data-ng-repeat="room in rooms | orderBy:'name'">
             <div class="card">
             <div class="card-content">
               <div class="card-title"><i class="material-icons left">{{room.icon}}</i>{{room.name}}<span class="new badge" data-ng-class="{ 'red': room.temperature > 24}" data-badge-caption="&deg;C">{{room.temperature | number: '1'}}</span></div>
@@ -102,11 +99,13 @@
     </footer>
 
     <!--Import jQuery before materialize.js and AngularJS-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="lib_js/jquery.matchHeight.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-    <!--Import AngularJS-->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="lib_js/jquery-3.2.1.min.js"></script>
+    <script src="lib_js/materialize-0.100.2.min.js"></script>
+    <script src="lib_js/paho-mqtt-1.0.3.min.js"></script>
+    <script src="lib_js/angular-1.4.9.min.js"></script>
+    <script src="lib_js/masonry.pkgd.min.js"></script>
+
     <script src="js/app.js"></script>
+    <script src="js/mqtt.js"></script>
   </body>
 </html>
