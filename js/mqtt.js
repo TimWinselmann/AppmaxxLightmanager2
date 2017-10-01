@@ -4,9 +4,24 @@ app.factory("MQTTService", function($rootScope, $log, $interval) {
 
     $rootScope.mqttConnected = false;
 
+    /* create random client id */
+    // dec2hex :: Integer -> String
+    function dec2hex(dec) {
+        return ('0' + dec.toString(16)).substr(-2)
+    }
+
+    // generateId :: Integer -> String
+    function generateId(len) {
+        var arr = new Uint8Array((len || 40) / 2)
+        window.crypto.getRandomValues(arr)
+        return Array.from(arr, dec2hex).join('')
+    }
+
+    var clientId = "web-mqtt-client-" + generateId();
+    $log.debug("clientId: " + clientId);
+
     // Create a client instance
-    //
-    client = new Paho.MQTT.Client("ws://192.168.178.49:1884/", "web-mqtt-client");
+    client = new Paho.MQTT.Client("ws://192.168.178.49:1884/", clientId);
 
     // set callback handlers
     client.onConnectionLost = onConnectionLost;

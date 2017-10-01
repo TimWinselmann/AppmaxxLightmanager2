@@ -88,12 +88,12 @@
 
               <table class="bordered highlight">
                 <tbody>
-                  <tr data-ng-repeat="light in room.lights | orderBy:'name'">
+                  <tr data-ng-repeat="light in room.lights | orderBy:'name'" data-ng-click="light.checked = !light.checked; toggleLight($event, room, light);">
                     <td>{{light.name}}</td>
                     <td style="text-align: right;">
                       <div class="switch">
                         <label>
-                          <input type="checkbox" data-ng-model="light.checked" data-ng-click="toggleLight(room, light);">
+                          <input type="checkbox" data-ng-model="light.checked">
                           <span class="lever"></span>
                         </label>
                       </div>

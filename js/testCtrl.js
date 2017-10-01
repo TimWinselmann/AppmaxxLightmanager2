@@ -18,8 +18,9 @@ app.controller("TestCtrl", function($scope, $http, $log, $interval, MQTTService)
         Materialize.toast('Incoming MQTT Message: ' + message, 4000);
     });
 
-    MQTTService.on('/home/light/*', function(message) {
-        Materialize.toast('/home/light/: ' + message, 4000);
+    MQTTService.on('/home/light/#', function(message) {
+        var incomingLight = JSON.parse(message);
+        Materialize.toast(incomingLight.name + ' wurde ' + (incomingLight.checked ? 'eingeschaltet' : 'ausgeschaltet'), 4000);
     });
 
     MQTTService.on('/home/presence', function(message) {
@@ -33,13 +34,9 @@ app.controller("TestCtrl", function($scope, $http, $log, $interval, MQTTService)
         });
     });
 
-    $scope.toggleLight = function(room, light) {
+    $scope.toggleLight = function(event, room, light) {
         MQTTService.send('/home/light/' + light.name, light);
-        if (light.checked) {
-            Materialize.toast(room.name + ' ' + light.name + ' wurde eingeschaltet', 4000);
-        } else {
-            Materialize.toast(room.name + ' ' + light.name + ' wurde ausgeschaltet', 4000);
-        }
+        event.preventDefault();
     }
 
     $scope.users = [{
