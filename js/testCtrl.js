@@ -18,7 +18,23 @@ app.controller("TestCtrl", function($scope, $http, $log, $interval, MQTTService)
         Materialize.toast('Incoming MQTT Message: ' + message, 4000);
     });
 
+    MQTTService.on('/home/light/*', function(message) {
+        Materialize.toast('/home/light/: ' + message, 4000);
+    });
+
+    MQTTService.on('/home/presence', function(message) {
+        var presenceUser = JSON.parse(message);
+
+        angular.forEach($scope.users, function(user, i) {
+            if (user.name === presenceUser.name) {
+                user.home = presenceUser.home;
+                Materialize.toast(presenceUser.name + ' ' + (presenceUser.home ? 'came' : 'left') + ' home', 4000);
+            }
+        });
+    });
+
     $scope.toggleLight = function(room, light) {
+        MQTTService.send('/home/light/' + light.name, light);
         if (light.checked) {
             Materialize.toast(room.name + ' ' + light.name + ' wurde eingeschaltet', 4000);
         } else {

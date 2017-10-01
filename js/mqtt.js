@@ -87,7 +87,7 @@ app.factory("MQTTService", function($rootScope, $log, $interval) {
 
         $log.debug('send: ' + topic + ' ' + message);
 
-        mqttMessage = new Paho.MQTT.Message(message);
+        mqttMessage = new Paho.MQTT.Message(JSON.stringify(message));
         mqttMessage.destinationName = topic;
 
         client.send(mqttMessage);
