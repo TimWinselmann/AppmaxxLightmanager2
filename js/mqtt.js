@@ -18,7 +18,7 @@ app.factory("MQTTService", function($rootScope, $log, $interval) {
     }
 
     var clientId = "web-mqtt-client-" + generateId();
-    $log.debug("clientId: " + clientId);
+    $log.debug("MQTT client id is: " + clientId);
 
     // Create a client instance
     client = new Paho.MQTT.Client("ws://192.168.178.49:1884/", clientId);
