@@ -35,3 +35,19 @@ main {
 table tr:last-child {
     border: none !important;
 }
+
+/*presences view */
+.presences-user-view .circle {
+  width: 64px;
+  height: 64px;
+   /* teal lighten-2 */
+  border: 3px solid #4db6ac !important;
+}
+
+.presences-user-view .btn {
+  margin-top: -38px;
+  padding: 0 0.5rem;
+  height: 15px;
+  line-height: 15px;
+  font-size: 0.7rem;
+}

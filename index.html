@@ -17,7 +17,7 @@
       <div class="navbar-fixed">
         <nav class="teal lighten-2">
          <div class="nav-wrapper">
-           <a href="#" class="brand-logo center"><i class="material-icons">lightbulb_outline</i> {{title}}</a>
+           <a href="#" class="brand-logo center"><i class="material-icons">home</i> {{title}}</a>
            <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
          </div>
        </nav>
@@ -27,12 +27,12 @@
          <div class="background">
            <img src="http://materializecss.com/images/office.jpg">
          </div>
-         <a href="#!user"><img class="circle" src="images/timw.jpg"></a>
+         <a href="#!user"><img class="circle" src="images/users/tim.jpg"></a>
          <a href="#!name"><span class="white-text name">Tim Winselmann</span></a>
-         <a href="#!email"><span class="white-text email">twinselmann@g mail.com</span></a>
+         <a href="#!email"><span class="white-text email">twinselmann@gmail.com</span></a>
        </div></li>
        <li><a class="subheader">Navigation</a></li>
-       <li><a class="waves-effect" href="#!reload"><i class="material-icons">lightbulb_outline</i>Licht</a></li>
+       <li><a class="waves-effect" href="#!home"><i class="material-icons">home</i>Home</a></li>
        <li><a class="waves-effect" href="#!history"><i class="material-icons">history</i>Historie</a></li>
        <li><div class="divider"></div></li>
        <li><a class="subheader">Daten</a></li>
@@ -55,12 +55,34 @@
         </div>
       </div>
     </div>
+
     <main class="container" >
 
       <div class="row grid" data-ng-hide="loading">
         <div class="grid-sizer col s1"></div>
+
+        <!-- presence status -->
+        <div class="col s12 m6 l4 grid-item">
+          <div class="card hoverable">
+          <div class="card-content">
+            <div class="card-title"><i class="material-icons left">home</i>Who's home?</div>
+            <div class="row presences-user-view">
+              <div class="col s4 center" data-ng-repeat="user in users">
+                <div style="position: relative; width: 64px; height: 64px;">
+                  <img style=" display: block;" class="circle" src="images/users/{{user.name}}.jpg">
+                  <span style="left:0; bottom: 0; width: 100%; text-align: center;">
+                    <a class="waves-effect waves-light btn" data-ng-class="{ 'red': !user.home}">{{user.home ? 'HOME' : 'AWAY'}}</a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <!-- lights -->
         <div class="col s12 m6 l4 grid-item" data-ng-repeat="room in rooms | orderBy:'name'">
-            <div class="card">
+            <div class="card hoverable">
             <div class="card-content">
               <div class="card-title"><i class="material-icons left">{{room.icon}}</i>{{room.name}}<span class="new badge" data-ng-class="{ 'red': room.temperature > 24}" data-badge-caption="&deg;C">{{room.temperature | number: '1'}}</span></div>
 
@@ -81,7 +103,7 @@
               </table>
             </div>
             <div class="card-action center-align">
-              <a class="btn waves-effect waves-light teal lighten-2"><i class="material-icons left">cloud</i>Button!</a>
+              <a class="btn waves-effect waves-light teal lighten-2" data-ng-click="publishMqttMessage();"><i class="material-icons left">cloud</i>MQTT!</a>
             </div>
           </div>
         </div>
@@ -93,7 +115,7 @@
       <div class="footer-copyright">
         <div class="container">
         &copy; 2017 Copyright AppmaxxLightmanager2
-        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        <i class="material-icons right tooltipped" data-position="top" data-delay="50" data-tooltip="{{mqttConnected ? 'MQTT connected' : 'MQTT not connected'}}">{{mqttConnected ? 'signal_wifi_4_bar' : 'signal_wifi_off'}}</i>
         </div>
       </div>
     </footer>
@@ -107,5 +129,6 @@
 
     <script src="js/app.js"></script>
     <script src="js/mqtt.js"></script>
+    <script src="js/testCtrl.js"></script>
   </body>
 </html>
